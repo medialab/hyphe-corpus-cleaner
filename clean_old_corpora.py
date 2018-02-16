@@ -45,7 +45,7 @@ def handleList(res):
             else:
                 destroyed.append(cid)
 
-    c = MongoClient(environ["HYPHE_MONGODB_HOST"], environ["HYPHE_MONGODB_PORT"])
+    c = MongoClient(environ["HYPHE_MONGODB_HOST"], int(environ["HYPHE_MONGODB_PORT"]))
     for d in destroyed:
         c.drop_database('%s_%s' % (environ["HYPHE_MONGODB_DBNAME"], d))
 
