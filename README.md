@@ -25,6 +25,11 @@ Day of week  | Yes        | 0-6 or SUN-SAT  | * / , - ?
 - `HYPHE_MONGO_DBNAME`: Mongo database name.
 - `HYPHE_ADMIN_PASSWORD`: Admin password if set in backend config.
 - `DAYSBACK`: Days to keep.
+- `MAILER_HOST`: SMTP server hostname.
+- `MAILER_PORT`: SMTP server port.
+- `MAILER_FROM`: `From:` email address.
+- `MAILER_TO`: `To:` email address(es). For example,  `name@provider.net,name2@provider.net`.
+
 
 You also need to link this container to `mongo` and `backend` containers.
 
