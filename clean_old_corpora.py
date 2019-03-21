@@ -41,7 +41,7 @@ def handleList(res):
                 continue
             res = yield proxy.callRemote('destroy_corpus', cid)
             if res['code'] == 'fail':
-                print sys.stderr, "WARNING: could not destroy old corpus %s: %s" % (cid, res['message'])
+                print >> sys.stderr, "WARNING: could not destroy old corpus %s: %s" % (cid, res['message'])
             else:
                 destroyed.append(cid)
 
