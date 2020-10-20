@@ -17,7 +17,7 @@ The following **optional** arguments allow to tweak the cleaning policy and logi
 
 - `CRON_SCHEDULE`: If defined, a built-in cron-like daemon will take care of running the the cleaning script at here-defined intervals.
 
-This is mostly meant to be used with docker-compose and an always-running cleaning job.
+This is mostly meant to be used with docker-compose and an always-running cleaning job.  
 **Do not use this if you use another way of schedulling**, like Kubernetes cronjobs for instance (since it launches "one-shot" jobs at intervals defined in the kubernetes cronjob parameters) or if you simply run it manually from time to time.
 
 A cron expression represents a set of times, using 6 space-separated fields.
@@ -37,7 +37,7 @@ For example, to clean every day at midnight sharp, set it to `0 0 0 * * *`
 - `MAILER_HOST`: SMTP server hostname.
 - `MAILER_PORT`: SMTP server port.
 - `MAILER_FROM`: `From:` email address.
-- `MAILER_TO`: `To:` email address(es). For example,  `name@provider.net,name2@provider.net`.
+- `MAILER_TO`: `To:` email address(es). For example,  `name@provider.net,name2@provider.net`.  
 If any of `MAILER_HOST`, `MAILER_PORT`, `MAILER_FROM` or `MAILER_TO` is missing, no mail will be sent and logging will only take place on the container's console.
 - `MAIL_TIMEOUT`: When run in one-shot mode (ie. CRON_SCHEDULE is **not** defined) we need to ensure that ssmtp has enough time to actually send the mail before the container shuts down. **(Defaults to 2 seconds.)**
 - `MAIL_AND_CONSOLE`: When "MAIL_\*" variables are defined, the job's output are sent by mail; set this to `0` to prevent logs from being also displayed on the container's console. **(Defaults to 1.)**
