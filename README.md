@@ -39,8 +39,9 @@ For example, to clean every day at midnight sharp, set it to `0 0 0 * * *`
 - `MAILER_FROM`: `From:` email address.
 - `MAILER_TO`: `To:` email address(es). For example,  `name@provider.net,name2@provider.net`.  
 If any of `MAILER_HOST`, `MAILER_PORT`, `MAILER_FROM` or `MAILER_TO` is missing, no mail will be sent and logging will only take place on the container's console.
-- `MAIL_TIMEOUT`: When run in one-shot mode (ie. CRON_SCHEDULE is **not** defined) we need to ensure that ssmtp has enough time to actually send the mail before the container shuts down. **(Defaults to 10 seconds.)**
+- `MAIL_TIMEOUT`: Maximum amount of time (seconds) to wait for the mail to be sent. **(Defaults to 10 seconds.)**
 - `MAIL_AND_CONSOLE`: When "MAIL_\*" variables are defined, the job's output are sent by mail; set this to `0` to prevent logs from being also displayed on the container's console. **(Defaults to 1.)**
+- `NO_EMPTY_MAIL`: If set to "1" (default), prevents empty mail to be sent (if there is nothing to clean up and the job produces no output). **(Defaults to 1.)**
 
 
 You also need to link this container to `mongo` and `backend` containers.
