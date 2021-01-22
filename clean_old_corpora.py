@@ -39,7 +39,7 @@ def handleList(res):
             if res['code'] == 'fail':
                 print >> sys.stderr, "WARNING: could not ping old corpus %s: %s" % (cid, res['message'])
                 continue
-            res = yield proxy.callRemote('destroy_corpus', cid)
+            res = yield proxy.callRemote('force_destroy_corpus', cid)
             if res['code'] == 'fail':
                 print >> sys.stderr, "WARNING: could not destroy old corpus %s: %s" % (cid, res['message'])
             else:
