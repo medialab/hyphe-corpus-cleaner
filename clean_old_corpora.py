@@ -7,6 +7,7 @@ from time import time
 from warnings import filterwarnings
 filterwarnings(action='ignore', category=DeprecationWarning, message="Python 2.6 is no longer supported by the Python core team")
 from pymongo import MongoClient
+from traceback import print_stack
 from twisted.internet import reactor, defer
 from txjsonrpc.web.jsonrpc import Proxy
 
@@ -21,6 +22,7 @@ dayms = 1000 * 60 * 60 * 24
 delay = dayms * daysback
 
 proxy = Proxy(environ['HYPHE_API_URL'])
+curcorpus = None
 
 @defer.inlineCallbacks
 def handleList(res):
@@ -28,6 +30,7 @@ def handleList(res):
         defer.returnValue(printError(res['message']))
     destroyed = []
     for cid, corpus in res['result'].items():
+        curcorpus = cid
         since = time() * 1000 - corpus['last_activity']
         if since > delay:
             print "REMOVING old corpus:", cid, corpus['last_activity'], int(since/dayms), "days old"
@@ -51,7 +54,8 @@ def handleList(res):
 
 
 def printError(error):
-    print >> sys.stderr, "ERROR: Cannot get list of corpora", error
+    print >> sys.stderr, "ERROR while working with corpus", curcorpus, error
+    traceback.print_stack(file=sys.stderr)
 
 def shutdown(data):
     reactor.stop()
