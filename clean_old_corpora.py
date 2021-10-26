@@ -26,6 +26,7 @@ curcorpus = None
 
 @defer.inlineCallbacks
 def handleList(res):
+    global curcorpus
     if res['code'] == 'fail':
         defer.returnValue(printError(res['message']))
     destroyed = []
@@ -54,8 +55,10 @@ def handleList(res):
 
 
 def printError(error):
+    global curcorpus
     print >> sys.stderr, "ERROR while working with corpus", curcorpus, error
     traceback.print_stack(file=sys.stderr)
+    exit(1)
 
 def shutdown(data):
     reactor.stop()
